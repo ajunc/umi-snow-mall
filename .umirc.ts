@@ -1,10 +1,19 @@
 import { defineConfig } from 'umi';
+const outputPath = 'dist/'
+const env = process.env.NODE_ENV
+const path = env === 'development' ? 'http://127.0.0.1:8000/' : outputPath
 
 export default defineConfig({
   title: '这是个商城',
   nodeModulesTransform: {
     type: 'none',
   },
+  mock: false,
+  ssr: {
+    devServerRender: false,
+  },
+  outputPath: outputPath,
+  publicPath: path,
   // history: { type: 'hash' },
   // base: '/kkb',
   theme: {
