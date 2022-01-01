@@ -4,6 +4,7 @@ import { WingBlank, Card, Grid } from 'antd-mobile';
 import { Link } from 'umi';
 import { DataItem } from 'antd-mobile/lib/grid/PropsType';
 import styles from './index.less';
+import { IGetInitialProps } from 'umi';
 
 function node({ id, title, img }: DataItem) {
   return (
@@ -14,14 +15,15 @@ function node({ id, title, img }: DataItem) {
   );
 }
 
-const Recommend = () => {
-  const [list, setList] = useState([]);
+const Recommend = props => {
+  const { list } = props;
+  //   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    queryRecommend().then(res => {
-      setList(res.list.data);
-    });
-  }, []);
+  //   useEffect(() => {
+  //     queryRecommend().then(res => {
+  //       setList(res.list.data);
+  //     });
+  //   }, []);
   return (
     <>
       <WingBlank size="lg" className={styles.main}>
@@ -48,4 +50,16 @@ const Recommend = () => {
     </>
   );
 };
+Recommend.getInitialProps = (async ctx => {
+  // return Promise.resolve({
+  //   data: {
+  //     title: 'Hello World',
+  //   }
+  // })
+  queryRecommend().then(res => {
+    return {
+      list: res.list.data,
+    };
+  });
+}) as IGetInitialProps;
 export default Recommend;
