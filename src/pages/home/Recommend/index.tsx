@@ -17,6 +17,7 @@ function node({ id, title, img }: DataItem) {
 
 const Recommend = props => {
   const { list } = props;
+  debugger;
   //   const [list, setList] = useState([]);
 
   //   useEffect(() => {
@@ -30,7 +31,7 @@ const Recommend = props => {
         <Card>
           <Card.Header title="好货推荐" />
           <Grid
-            data={list.slice(0, 6)}
+            data={list && list.slice(0, 6)}
             columnNum={3}
             renderItem={data => node({ ...data })}
           />
@@ -41,7 +42,7 @@ const Recommend = props => {
         <Card>
           <Card.Header title="猜你喜欢" />
           <Grid
-            data={list.slice(6)}
+            data={list && list.slice(6)}
             columnNum={2}
             renderItem={data => node({ ...data })}
           />
@@ -50,16 +51,17 @@ const Recommend = props => {
     </>
   );
 };
-Recommend.getInitialProps = (async ctx => {
-  // return Promise.resolve({
-  //   data: {
-  //     title: 'Hello World',
-  //   }
-  // })
-  queryRecommend().then(res => {
-    return {
-      list: res.list.data,
-    };
-  });
-}) as IGetInitialProps;
+// Recommend.getInitialProps = (async ctx => {
+//   // return Promise.resolve({
+//   //   data: {
+//   //     title: 'Hello World',
+//   //   }
+//   // })
+//   debugger
+//   queryRecommend().then(res => {
+//     return {
+//       list: res.list.data,
+//     };
+//   });
+// }) as IGetInitialProps;
 export default Recommend;

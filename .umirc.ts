@@ -10,7 +10,8 @@ export default defineConfig({
   },
   //   mock: false,
   ssr: {
-    devServerRender: true,
+    // devServerRender: true,
+    forceInitial: true,
   },
   outputPath: outputPath,
   publicPath: path,
